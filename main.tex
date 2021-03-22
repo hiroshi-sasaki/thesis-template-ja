@@ -1,0 +1,97 @@
+\documentclass[a4j,12pt,onecolumn,oneside,final]{jreport}
+
+% ----------------------------------------------------------------------
+% 学士は [bthesis]、修士は [mthesis] を用いる
+% ----------------------------------------------------------------------
+\usepackage[bthesis]{thesis-ict}
+% 下記は変更しない（1 つ目が学士用、2 つ目が修士用）
+\affiliation{情報通信系}{工学院 情報通信系 情報通信コース}
+
+% ----------------------------------------------------------------------
+% パッケージ
+% ----------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{cleveref}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{import}
+\usepackage[labelformat=simple,labelfont=bf]{subcaption} % simple にすると()をつけない。「オプション」内で \thesubfigure  に()をつけるので、重複を避けるためこのように指定する
+
+% ----------------------------------------------------------------------
+% オプション
+% ----------------------------------------------------------------------
+% 参照：https://qiita.com/Hdan/items/8c59a7e0a3215ae32d74
+\crefname{chapter}{第}{第}
+\creflabelformat{chapter}{#2#1章#3}
+\crefname{section}{第}{第}
+\creflabelformat{section}{#2#1章#3}
+\crefname{equation}{式}{式}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{appendix}{付録}{付録}
+\renewcommand{\figurename}{\textbf{図}} 
+\renewcommand{\tablename}{\textbf{表}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand{\thesubfigure}{(\alph{subfigure})} % subcaption でなくここで()をつける
+\captionsetup[figure]{labelsep=colon,labelfont=bf}
+\captionsetup[table]{labelsep=colon,labelfont=bf}
+
+% ----------------------------------------------------------------------
+% 適宜変更する
+% ----------------------------------------------------------------------
+\year{令和3年度}
+\date{令和4年3月}
+
+\advisorA{大岡山太郎}
+\advisorAjobtitle{教授}
+% 指導教員が二人の場合は下記を用いる
+% \advisorB{石川台次郎}
+% \advisorBjobtitle{准教授}
+
+\title{論文のタイトル}
+\studentid{00B/M00000}
+\author{すずかけ台花子}
+
+% ----------------------------------------------------------------------
+% 表紙・目次
+% ----------------------------------------------------------------------
+\begin{document}
+
+\abstract{\input{abstract}}
+\maketitle
+\setcounter{page}{1}
+\renewcommand{\thepage}{\roman{page}}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\clearpage
+
+% ----------------------------------------------------------------------
+% 内容
+% ----------------------------------------------------------------------
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+
+\include{examples/introduction}    % サンプル
+% \include{introduction}
+\include{examples/background}      % サンプル
+% \include{background}
+\include{examples/motivation}      % サンプル
+% \include{motivation}
+\include{examples/proposedsystem}  % サンプル
+% \include{proposedsystem}
+\include{examples/evaluation}      % サンプル
+% \include{evaluation}
+\include{examples/relatedwork}     % サンプル
+% \include{relatedwork}
+\include{examples/conclusion}      % サンプル
+% \include{conclusion}
+\include{examples/acknowledgment}  % サンプル
+% \include{acknowledgment}
+\bibliographystyle{junsrt}
+\bibliography{examples/main}       % サンプル
+% \bibliography{main}
+\input{examples/appendix}          % サンプル
+% \input{appendix}
+
+\end{document}

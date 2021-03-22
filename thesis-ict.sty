@@ -1,0 +1,392 @@
+%%      Filename : thesis-ict.sty
+%%
+%%      http://www.ict.e.titech.ac.jp/ict_local/ で配布されている
+%%      thesis19_cs.tgz に含まれている gthesis_myown.sty をリネーム、中身を整理
+%%      した上で少し変更を加えて学士・修士両方に対応するようにしました。
+%%      \usepackage[{b,m}thesis]{thesis-ict} のオプションでスイッチしてくださ
+%%      い。
+%%
+\RequirePackage{txfonts}
+
+%% ----------------------------------------------------------------------------
+%%      字と字の間
+\kanjiskip 4.2857mm plus .2zw
+\advance \kanjiskip by -1zw
+\xkanjiskip 2pt plus 2pt minus .5pt
+\def\baselinestretch{1}
+\def\arraystretch{1}
+
+%% ----------------------------------------------------------------------------
+%%      行ピッチ
+\newdimen \lineheight
+\lineheight 7.9mm
+
+%% ----------------------------------------------------------------------------
+%%      改行幅の変更
+\def\@normalsize{\@setsize\normalsize{\lineheight}\xiipt\@xiipt
+ \abovedisplayskip 10pt plus2pt minus5pt
+ \belowdisplayskip \abovedisplayskip
+ \abovedisplayshortskip \z@ plus3pt
+ \belowdisplayshortskip 6pt plus3pt minus3pt
+ \let\@listi\@listI
+}
+\def\small{\@setsize\small{5.29mm}\xipt\@xipt
+ \abovedisplayskip 8.5pt plus3pt minus4pt
+ \belowdisplayskip \abovedisplayskip
+ \abovedisplayshortskip \z@ plus2pt
+ \belowdisplayshortskip 4pt plus2pt minus2pt
+ \def\@listi{\leftmargin\leftmargini \parsep \z@
+  \itemsep 2pt plus 1pt minus 1pt
+  \topsep 4pt plus 2pt minus 2pt}
+}
+\def\scriptsize{\@setsize\scriptsize{3.9mm}\viiipt\@viiipt}
+\@normalsize
+
+%% ----------------------------------------------------------------------------
+%%      空白行の定義
+\newdimen \blankline
+\blankline 2\lineheight
+\advance \blankline by -12pt
+\def\bline{\vskip\blankline}
+
+%% ----------------------------------------------------------------------------
+%%      原稿用紙の寸法
+\setlength{\baselineskip}{\lineheight}
+\setlength{\topskip}{\baselineskip}
+\setlength{\topmargin}{-1in}
+
+% 以下の 3 行が合わせて 30mm になるようにします。
+\addtolength{\topmargin}{10mm}
+\setlength{\headheight}{10mm}
+\setlength{\headsep}{10mm}
+
+\setlength{\oddsidemargin}{-1in}
+\addtolength{\oddsidemargin}{29mm}
+
+\setlength{\evensidemargin}{-1in}
+\addtolength{\evensidemargin}{30mm}
+
+\setlength{\textwidth}{150mm}
+
+\setlength{\parindent}{1zw}
+\addtolength{\parindent}{\kanjiskip}
+
+\setlength{\parskip}{\lineheight}
+\setlength{\parskip}{0mm}
+
+\setlength{\floatsep}{\lineheight}
+\setlength{\textfloatsep}{\lineheight}
+\setlength{\intextsep}{\lineheight}
+
+%% ----------------------------------------------------------------------------
+%%      参考文献
+\def\thebibliography#1{\chapter*{参考文献\@mkboth
+  {参 考 文 献}{参 考 文 献}}\list
+  {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+  \advance\leftmargin\labelsep
+  \usecounter{enumi}}
+  \def\newblock{\hskip .11em plus .33em minus .07em}
+  \sloppy
+  \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+
+%% ----------------------------------------------------------------------------
+%%      章番号位置の調整
+\def\@makechapterhead#1{ \vspace*{\lineheight} { \parindent 0pt \raggedright
+ \ifnum \c@secnumdepth >\m@ne \huge\bf \@chapapp{} \thechapter \par
+ \vskip 20pt \fi \Huge \bf #1\par
+ \nobreak \vskip 40pt } }
+
+\def\@makeschapterhead#1{ \vspace*{\lineheight} { \parindent 0pt \raggedright
+ \Huge \bf #1\par
+ \nobreak \vskip 40pt } }
+
+%% ----------------------------------------------------------------------------
+%%      表紙 & 内容梗概
+\def\year#1{\gdef\@year{#1}}
+\def\title#1{\gdef\@title{#1}}
+\def\advisorA#1{\gdef\@advisorA{#1}}
+\def\advisorAjobtitle#1{\gdef\@advisorAjobtitle{#1}}
+\def\advisorB#1{\gdef\@advisorB{#1}}
+\def\advisorBjobtitle#1{\gdef\@advisorBjobtitle{#1}}
+\def\studentid#1{\gdef\@studentid{#1}}
+\def\author#1{\gdef\@author{#1}}
+
+\def\date#1{\gdef\@date{#1}}
+\def\affiliation#1#2{\gdef\@affiliationB{#1}\gdef\@affiliationM{#2}
+  \setbox0=\hbox{#2}
+  \ifdim\wd0>0em {\gdef\@所属2学科{#1\hspace{1zw}(#2)}}
+  \else {\gdef\@所属2学科{#1}} \fi}
+\long\def\abstract#1{\gdef\@abstract{#1}}
+
+\DeclareOption{bthesis}{
+  \def\maketitle{\begin{titlepage}
+  \setcounter{page}{-1}
+  {\huge
+    \begin{center} 東京工業大学工学院\\
+      \vspace{5mm} 学士特定課題研究報告書\\
+      \vspace{0mm} \ \\
+      \fbox{
+        \begin{tabular}{c}
+        \@title
+        \end{tabular}
+      }
+      \\
+      \vspace{5mm}
+      \begin{tabular}{llr}
+        指導教員 & \@advisorA& \@advisorAjobtitle \\
+        \@ifundefined{@advisorB}{~\\}{& \@advisorB& \@advisorBjobtitle \\}
+      \end{tabular} \\
+      \vspace{10mm} \@date \\
+      \vspace{8mm} 提出者 \\
+      \vspace{-4mm} \ \\
+      \begin{tabular}{ll}
+        系       & \@affiliationB \\
+        学籍番号 & \@studentid \\
+        氏名     & \@author
+      \end{tabular}
+      \vspace{5mm}
+      \begin{flushright}
+        \begin{tabular}{|l|p{19.6mm}|p{19.6mm}|}
+          \hline
+          \raisebox{-0.55ex}{\raisebox{0.0ex}{指導教員認定印}} & & \\[3mm]
+          \hline
+          \raisebox{-0.55ex}{\raisebox{0.0ex}{系主任認定印}} & \multicolumn{2}{|c|}{}\\[3mm]
+          \hline
+        \end{tabular}
+      \end{flushright}
+    \end{center}
+  }
+
+  \newpage
+  \thispagestyle{empty}
+  \let\footnotesize\small \let\footnoterule\relax \setcounter{page}{0}
+  \begin{flushleft}
+    \@year\hspace{1zw}学士特別課題研究報告書内容梗概
+  \end{flushleft}
+  \begin{center}
+    {\Large \@title}
+  \end{center}
+  \begin{flushright}
+    \begin{tabular}{ll}
+      指導教員\hspace{1zw}    & \@advisorA\hspace{1zw}\@advisorAjobtitle \\
+      \@ifundefined{@advisorB}{}{\hspace{1zw} & \@advisorB\hspace{1zw}\@advisorBjobtitle \\}
+      \@affiliationB          & \\
+      \@studentid\hspace{1zw} & \@author
+    \end{tabular}
+  \end{flushright}
+
+  \@abstract
+  \thispagestyle{empty}
+  \vfil
+  \end{titlepage}
+  \setcounter{footnote}{0} \let\thanks\relax
+  \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\maketitle\relax}
+}
+
+\DeclareOption{mthesis}{
+  \def\tokyotechlogo{{\normalsize\sc
+    \hspace{17mm}\includegraphics[width=1.2cm,clip]{logo}\\
+    \vspace{-\baselineskip}\vspace{-6.8mm}
+    \hspace{34mm}Tokyo Institute of Technology\\
+    \vspace{-1\baselineskip}\vspace{4.5mm}
+    \hspace{34mm}Department of Information and Communications Engineering
+  }}
+
+  \def\tokyotechtitle{
+    \begin{flushleft}\tokyotechlogo\end{flushleft}
+    \vspace{4zw}
+    \begin{center}
+      {\Large
+        \@ifundefined{@year}{}{\@year~}{\LARGE 修士論文}\\\vspace{2zw}
+        {\LARGE
+          \begin{tabular}{|c|}\hline
+            \@title \\ \hline
+          \end{tabular}
+        }
+        \\\vspace{5zw}
+
+        \begin{tabular}{llr}
+          \@ifundefined{@advisorA}{}{指導教員 & \@advisorA & \@advisorAjobtitle \\}
+          \@ifundefined{@advisorB}{}{         & \@advisorB & \@advisorBjobtitle \\}
+        \end{tabular}
+        \vspace{1zw}
+
+        \@ifundefined{@date}{}{\@date}\\\vspace{6zw}
+        {\LARGE 提出者}\\\vspace{1zw}
+        {\Large \@ifundefined{@affiliationM}{}{\@affiliationM}}\\\vspace{1zw}
+        {\LARGE \@ifundefined{@studentid}{}{\@studentid\hspace{1zw}}}
+        {\LARGE \@ifundefined{@author}{}{\@author}}
+      }
+    \end{center}
+  }
+
+  \def\maketitle{
+    \begin{titlepage}
+    \setcounter{page}{-1}
+    \setlength\topmargin{\paperheight}
+    \addtolength\topmargin{-1.38\textheight}
+    \tokyotechtitle%
+    \setcounter{page}{0}
+    \newpage
+    \chapter*{概要}
+    \@abstract
+    \thispagestyle{empty}
+    \vfil
+    \end{titlepage}
+    \setcounter{footnote}{0} \let\thanks\relax
+    \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\maketitle\relax}
+}
+
+%% ----------------------------------------------------------------------------
+%%      フットノート
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%% ----------------------------------------------------------------------------
+%%      章番号位置の調整
+\def\@chapapp#1{第#1章}
+
+\def\@makechapterhead#1{ \vspace*{\lineheight} { \parindent 0pt \raggedright
+ \ifnum \c@secnumdepth >\m@ne \huge\bf \@chapapp \thechapter \par
+ \vskip 20pt \fi \Huge \bf #1\par
+ \nobreak \vskip 40pt } }
+
+\def\@makeschapterhead#1{ \vspace*{\lineheight} { \parindent 0pt \raggedright
+ \Huge \bf #1\par
+ \nobreak \vskip 40pt } }
+
+%% ----------------------------------------------------------------------------
+%%      付録
+\def\appendix{
+  \par
+  \setcounter{chapter}{0}
+  \setcounter{section}{0}
+  \def\@chapapp{付録 }
+  \def\thechapter{\Alph{chapter}}
+}
+
+%% ----------------------------------------------------------------------------
+%%      目次
+\renewcommand{\contentsname}{目\quad 次}
+
+\def\@pnumwidth{3em}
+\def\chapter{\newpage \thispagestyle{plain} \global\@topnum\z@
+\@afterindentfalse \secdef\@chapter\@schapter}
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+  \refstepcounter{chapter}
+  \typeout{\@chapapp{\thechapter}.}
+  \addcontentsline{toc}{chapter}{\protect
+    {\advance\hangindent1in {\@chapapp{\thechapter}}} ~ #1}\else
+  \addcontentsline{toc}{chapter}{#1}\fi
+  \chaptermark{#1}
+  \addtocontents{lof}{\protect\addvspace{10pt}}
+\addtocontents{lot}{\protect\addvspace{10pt}} \if@twocolumn
+\@topnewpage[\@makechapterhead{#2}]
+  \else \@makechapterhead{#2}
+  \@afterheading \fi}
+\def\@schapter#1{\if@twocolumn \@topnewpage[\@makeschapterhead{#1}]
+  \else \@makeschapterhead{#1}
+  \@afterheading\fi}
+
+%% ----------------------------------------------------------------------------
+%%      目次に番号なしの章を加える．例：\addchapter{参考文献}
+\newcommand{\addchapter}[1]{\addcontentsline{toc}{chapter}{\bf #1}}
+
+%% ----------------------------------------------------------------------------
+%%      柱を加える
+\mark{{}{}}   % Initializes TeX's marks
+
+%% ----------------------------------------------------------------------------
+%%      図を目いっぱい表示出来るようにする
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+
+%% ----------------------------------------------------------------------------
+%%      図、章番号を増やさない
+% 2 ページ以上にまたがる図の時に使用してください。
+% 使用例
+%\begin{figure}
+%\caption{sample No.1}
+%\end{figure}
+%\newpage
+%\begin{figure}
+%\noinccaption{sample No.2}
+%\end{figure}
+
+\def\refcounter#1{\let\@tempa\protect
+\def\protect{\noexpand\protect\noexpand}
+\edef\@currentlabel{\csname p@#1\endcsname\csname the#1\endcsname}
+\let\protect\@tempa}
+
+\def\noinccaption{\refcounter\@captype \@dblarg{\@caption\@captype}}
+
+\makeatletter
+  \renewcommand{\theequation}{
+    \thesection.\arabic{equation}}
+  \@addtoreset{equation}{section}
+\makeatother
+\newcommand{\qed}{\hbox{\rule[-2pt]{3pt}{6pt}}} % Proof End!
+\newcommand{\pend}{\hfill\qed}
+\newcommand{\bsquare}{\hbox{\rule{6pt}{6pt}}} % Proof End in Black!
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newtheorem{df}{定義}[chapter]
+\newtheorem{pr}{命題}[chapter]
+\newtheorem{theo}{定理}[chapter]
+\newtheorem{col}{系}[chapter]
+\newtheorem{lem}{補題}[chapter]
+\newtheorem{pot}{ \small \it proof}
+\newtheorem{pol}[lem]{\small \it proof}
+\newtheorem{ex}{例}
+\newcommand{\bigzerou}{\smash{\hbox{0}}}
+\newcommand{\bm}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\tdeg}{\mbox{\rm tdeg}}
+\newcommand{\myappendix}{
+\setcounter{secnumdepth}{-1}
+\appendix\chapter{Appendix}
+\setcounter{secnumdepth}{2}
+\setcounter{chapter}{1}}
+
+\ProcessOptions
+
+%% ----------------------------------------------------------------------------
+%%
+%%      変更しているのは、キャプション、原稿用紙の寸法、改行幅、章番号位置、
+%%      参考文献、参考文献の引用、フットノート、内容梗概、表紙です。
+%%
+%%  参考文献：
+%%      平成７年度版卒業論文の提出に関する諸注意
+%%      複数のメール
+%%      LaTeX トータルガイドのみ
+%%      TeX Book なし（無謀）^^;
+%%  履歴：
+%%       ver. 1.0       1994/Dec/14 writtten by akito@pi.titech.ac.jp
+%%       ver. 1.1       1994/Dec/15 added footnote by akito@pi
+%%       ver. 1.2       1994/Dec/26 Ａ４スタイルに対応 by akito@pi,
+%%                      改行幅の変更 ieeej.sty から引用,
+%%                      タイトルページのパラーメタの指定方法の変更
+%%                      by ichizawa@tithp0.phys.titech.ac.jp
+%%                      章番号の位置合わせ by ichizawa@tithp0.phys
+%%                      内容梗概の段落わけ by ichizawa@tithp0.phys
+%%                      字の間隔の調整 ieeej.sty から引用
+%%                      \parindent  の調整 by ichizawa@tithp0.phys
+%%      ver. 1.2a       章、図、表の日本語化 by saibara@ctrl.titech
+%%                      段落間の距離の調整 by saibara@ctrl.titech
+%%                      jreportへの対応 by saibara@ctrl.titech
+%%      ver. 1.2b       付録の対応 by rui@ctrl.titech
+%%                      目次のタイトルの漢字化 by rui@ctrl.titech
+%%                      謝辞、参考文献を目次に載せるための\addchapterの追加
+%%                      by rui@ctrl.titech
+%%                      jreportにおける柱の追加 by rui@ctrl.titech
+%%      ver. 1.2c       図をめいっぱい表示出来るようにする
+%%                       by saibara@ctrl.titech
+%%      ver. 1.2d       \noinccaptionの追加 by saibara@ctrl.titech
+%%      ver. 1.2e       卒論表紙の追加 -1ページに作る。by saibara@ctrl.titech
+%%      ver. warhol(1.2e.001)
+%%                      微妙に変えた.坂庭・山田研バージョン by warhol
+%%      ver. nozaki     章と参考文献の表記：英語に対応
+%%                      (English/Japanese とある部分：4箇所)
+%%      ver. 160606     指導教員認定印/学科長認定印の枠を調整
+%%      ver. 190620     情報通信系に対応
+%%
+%% ----------------------------------------------------------------------------

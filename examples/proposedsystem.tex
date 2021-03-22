@@ -1,0 +1,32 @@
+\chapter{提案手法}\label{ch:proposedsytem}
+
+提案手法について説明する。
+図を用いると効果的なことが多いので積極的に活用する。
+図にはベクタイメージを用いた方が綺麗なのでできる限りPDFファイルを用いること。\footnote{\cref{sec:results}で登場するグラフに関しても同様である。}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{examples/figures/square}
+  \caption{正方形}\label{fig:square}
+\end{figure}
+
+図は必ず本文中で参照すること。
+\cref{fig:square}は正方形である。
+
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+  \centering
+    \includegraphics[width=0.8\linewidth]{examples/figures/square}
+    \caption{正方形}\label{subfig:square}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[t]{0.45\textwidth}
+  \centering
+    \includegraphics[width=0.8\linewidth]{examples/figures/circle}
+    \caption{円}\label{subfig:circle}
+  \end{subfigure}
+  \caption{正方形と円}\label{fig:square-circle}
+\end{figure}
+
+\cref{fig:square-circle}は正方形と円で、\cref{subfig:circle}は円である。
