@@ -1,5 +1,6 @@
 ## Pdf file in root directory such as main.pdf
 /*.pdf
+!/logo.pdf
 
 # Created by https://www.toptal.com/developers/gitignore/api/latex
 # Edit at https://www.toptal.com/developers/gitignore?templates=latex
