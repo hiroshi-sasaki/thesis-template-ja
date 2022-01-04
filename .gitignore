@@ -1,4 +1,4 @@
-## Pdf file in root directory such as main.pdf
+## Pdf files in root directory (such as main.pdf) except logo.pdf
 /*.pdf
 !/logo.pdf
 
