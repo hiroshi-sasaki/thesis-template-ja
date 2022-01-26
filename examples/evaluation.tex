@@ -7,28 +7,29 @@
 
 \begin{table}[ht]
   \caption{数字が色々書いてある表}{
+  \rowcolors{3}{gray90}{}
   \centering
   \resizebox{0.95\textwidth}{!}{
-    \begin{tabular}{c  c c c  c c c}
+    {\renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{c>{\hspace{1pc}}c c c>{\hspace{1pc}}c c c} % https://tex.stackexchange.com/a/31704
       \toprule
-比較 & \multicolumn{3}{c}{何かの結果} & \multicolumn{3}{c}{何かとの比較} \\
-対象  & 面積($mm^2$) & 遅延($ns$)  & 電力($m W$)    & 面積(\%)  & 遅延(\%) & 電力(\%) \\
+      \multirow{2}{*}{比較対象} & \multicolumn{3}{c}{何かの結果} & \multicolumn{3}{c}{何かとの比較} \\
+             & 面積($mm^2$) & 遅延($ns$) & 電力($m W$) & 面積(\%)  & 遅延(\%) & 電力(\%) \\
       \midrule
-ベースライン & 347,329.19 & 1.62 & 15.84 & --- & --- & --- \\
-      \midrule
-提案手法1 & 412,263.87 & 1.65 & 16.17 & 18.69 & 1.85 & 2.12 \\
-      \midrule
-提案手法2 & 370,972.35 & 2.42 & 17.95 & 6.80 & 49.38 & 11.00 \\
-      \midrule
-提案手法3 & 356,694.82 & 1.98 & 16.00 & 2.69 & 22.22 & 1.06 \\
+ベースライン &   347,329.19 &       1.62 &       15.84 &       --- &      --- &      --- \\
+   提案手法1 &   412,263.87 &       1.65 &       16.17 &     18.69 &     1.85 &     2.12 \\
+   提案手法2 &   370,972.35 &       2.42 &       17.95 &      6.80 &    49.38 &    11.00 \\
+   提案手法3 &   356,694.82 &       1.98 &       16.00 &      2.69 &    22.22 &     1.06 \\
       \bottomrule
-    \end{tabular}\label{tab:example}
+    \end{tabular}}\label{tab:example}
   }
 }
 \end{table}
 
 \cref{tab:example}には色々な数字を示してある。
 なお表には縦線を入れない方が見た目はすっきりしていて綺麗である（リンタの下記メッセージを見たことがある人もいるのではなかろうか：``Vertical rules in tables are ugly.''）。
+また奇数列・偶数列の一方に網掛けを入れてある。
+行数や列数が多い場合に視認性が高まるので適宜使うと良い。
 
 \section{評価結果}\label{sec:results}
 
