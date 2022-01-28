@@ -2,7 +2,12 @@
 
 提案手法について説明する。
 図を用いると効果的なことが多いので積極的に活用する。
-図にはベクタイメージを用いた方が綺麗なのでできる限りPDFファイルを用いること。\footnote{\cref{sec:results}で登場するグラフに関しても同様である。}
+図にはベクタイメージを用いた方が綺麗なのでできる限りPDFファイルを用いること\footnote{\cref{sec:results}で登場するグラフに関しても同様である。}。
+なおPDFファイルの上下左右に余白があると思ったような見た目にならないので、例えば下記のコマンドなどで余白を取り除くと良い。
+
+\begin{lstlisting}[language=bash,escapeinside={(*}{*)}]
+(*\colorbox{gray90}{\% pdfcrop --margins 0 input.pdf output.pdf}*)
+\end{lstlisting}
 
 \begin{figure}[ht]
   \centering
