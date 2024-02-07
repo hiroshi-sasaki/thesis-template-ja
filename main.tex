@@ -4,12 +4,13 @@
 % 学士は [bthesis]、修士は [mthesis] を用いる
 % ----------------------------------------------------------------------
 \usepackage[bthesis]{thesis-ict}
-% 下記は変更しない（1 つ目が学士用、2 つ目が修士用）
-\affiliation{情報通信系}{工学院 情報通信系 情報通信コース}
+% 1 つ目、2 つ目が学士用、3 つ目が修士用
+\affiliation{工学院}{情報通信系}{工学院 情報通信系 情報通信コース}
 
 % ----------------------------------------------------------------------
 % パッケージ
 % ----------------------------------------------------------------------
+\usepackage{enumitem}
 \usepackage{listings}
 \usepackage[table]{xcolor}
 \usepackage{multirow}
@@ -19,6 +20,7 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{import}
 \usepackage[labelformat=simple,labelfont=bf]{subcaption} % simple にすると()をつけない。「オプション」内で \thesubfigure  に()をつけるので、重複を避けるためこのように指定する
+% \usepackage{setspace}\setstretch{1.2}
 
 % ----------------------------------------------------------------------
 % オプション
@@ -41,12 +43,14 @@
 \captionsetup[table]{labelsep=colon,labelfont=bf}
 \definecolor{gray90}{gray}{0.9} % https://texblog.org/2011/09/02/coloring-every-alternate-table-row/
 \lstset{basicstyle=\ttfamily}
+\setlist[itemize]{topsep=10pt,partopsep=4pt,parsep=2pt,itemsep=2pt,listparindent=\parindent{}}
+\setlist[enumerate]{topsep=10pt,partopsep=4pt,parsep=2pt,itemsep=2pt,listparindent=\parindent{}}
 
 % ----------------------------------------------------------------------
 % 適宜変更する
 % ----------------------------------------------------------------------
-\year{令和3年度}
-\date{令和4年3月}
+\year{令和5年度}
+\date{令和6年2月}
 
 \advisorA{大岡山太郎}
 \advisorAjobtitle{教授}
