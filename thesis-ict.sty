@@ -113,7 +113,7 @@
 \def\author#1{\gdef\@author{#1}}
 
 \def\date#1{\gdef\@date{#1}}
-\def\affiliation#1#2{\gdef\@affiliationB{#1}\gdef\@affiliationM{#2}
+\def\affiliation#1#2#3{\gdef\@affiliationBs{#1}\gdef\@affiliationBd{#2}\gdef\@affiliationM{#3}
   \setbox0=\hbox{#2}
   \ifdim\wd0>0em {\gdef\@所属2学科{#1\hspace{1zw}(#2)}}
   \else {\gdef\@所属2学科{#1}} \fi}
@@ -141,9 +141,9 @@
       \vspace{8mm} 提出者 \\
       \vspace{-4mm} \ \\
       \begin{tabular}{ll}
-        系       & \@affiliationB \\
-        学籍番号 & \@studentid \\
-        氏名     & \@author
+        \@affiliationBs & \@affiliationBd \\
+        学籍番号        & \@studentid \\
+        氏名            & \@author
       \end{tabular}
       \vspace{5mm}
       \begin{flushright}
@@ -162,7 +162,7 @@
   \thispagestyle{empty}
   \let\footnotesize\small \let\footnoterule\relax \setcounter{page}{0}
   \begin{flushleft}
-    \@year\hspace{1zw}学士特定課題研究報告書梗概
+    \@year\hspace{1zw}学士特定課題研究内容梗概
   \end{flushleft}
   \begin{center}
     {\Large \@title}
@@ -171,7 +171,7 @@
     \begin{tabular}{ll}
       指導教員\hspace{1zw}    & \@advisorA\hspace{1zw}\@advisorAjobtitle \\
       \@ifundefined{@advisorB}{}{\hspace{1zw} & \@advisorB\hspace{1zw}\@advisorBjobtitle \\}
-      \@affiliationB          & \\
+      \@affiliationBs\@affiliationBd          & \\
       \@studentid\hspace{1zw} & \@author
     \end{tabular}
   \end{flushright}
