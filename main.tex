@@ -10,6 +10,7 @@
 % ----------------------------------------------------------------------
 % パッケージ
 % ----------------------------------------------------------------------
+\usepackage{enumitem}
 \usepackage{listings}
 \usepackage[table]{xcolor}
 \usepackage{multirow}
@@ -41,6 +42,8 @@
 \captionsetup[table]{labelsep=colon,labelfont=bf}
 \definecolor{gray90}{gray}{0.9} % https://texblog.org/2011/09/02/coloring-every-alternate-table-row/
 \lstset{basicstyle=\ttfamily}
+\setlist[itemize]{topsep=10pt,partopsep=4pt,parsep=2pt,itemsep=2pt,listparindent=\parindent{}}
+\setlist[enumerate]{topsep=10pt,partopsep=4pt,parsep=2pt,itemsep=2pt,listparindent=\parindent{}}
 
 % ----------------------------------------------------------------------
 % 適宜変更する
